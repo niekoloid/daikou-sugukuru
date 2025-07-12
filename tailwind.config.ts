@@ -41,6 +41,7 @@ const config: Config = {
       screens: {
         'xs': '375px',
         'safe': '414px',
+        'landscape': { 'raw': '(orientation: landscape)' },
       },
       maxWidth: {
         'mobile': '414px',

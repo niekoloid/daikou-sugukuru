@@ -66,31 +66,31 @@ export default function MeterPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black w-full overflow-hidden">
       {/* ヘッダー（非フルスクリーン時のみ表示） */}
       {!isFullscreen && (
-        <div className="bg-gray-900 p-4 flex items-center justify-between">
+        <div className="bg-gray-900 p-3 landscape:p-2 flex items-center justify-between w-full">
           <button
             onClick={() => router.back()}
             className="flex items-center text-white hover:text-gray-300"
           >
-            <ArrowLeft className="w-5 h-5 mr-2" />
-            戻る
+            <ArrowLeft className="w-4 h-4 landscape:w-3 landscape:h-3 mr-1" />
+            <span className="text-sm landscape:text-xs">戻る</span>
           </button>
           
-          <h1 className="text-white text-lg font-semibold">料金メーター</h1>
+          <h1 className="text-white text-base landscape:text-sm font-semibold">料金メーター</h1>
           
           <button
             onClick={toggleFullscreen}
             className="text-white hover:text-gray-300"
           >
-            <Maximize2 className="w-5 h-5" />
+            <Maximize2 className="w-4 h-4 landscape:w-3 landscape:h-3" />
           </button>
         </div>
       )}
 
       {/* メーター本体 */}
-      <div className={`${isFullscreen ? 'h-screen' : 'min-h-[calc(100vh-80px)]'}`}>
+      <div className={`w-full ${isFullscreen ? 'h-screen' : 'min-h-[calc(100vh-60px)] landscape:min-h-[calc(100vh-40px)]'}`}>
         <DrivingMeter
           onStart={() => {
             console.log('メーター開始');
@@ -111,7 +111,7 @@ export default function MeterPage() {
               navigator.vibrate([300, 100, 300]);
             }
           }}
-          className="h-full"
+          className="w-full h-full"
         />
       </div>
 
