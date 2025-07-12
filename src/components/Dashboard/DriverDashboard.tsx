@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react';
 import { User, Position, Ride, RideStatus } from '@/types';
 import { useGeolocation } from '@/hooks/useGeolocation';
 import GoogleMap from '@/components/Map/GoogleMap';
-import { Car, DollarSign, Clock, Phone, Navigation, CheckCircle, AlertCircle } from 'lucide-react';
+import DrivingMeter from '@/components/Driver/DrivingMeter';
+import { Car, DollarSign, Clock, Phone, Navigation, CheckCircle, AlertCircle, Gauge } from 'lucide-react';
+import Link from 'next/link';
 
 interface DriverDashboardProps {
   user: User;
@@ -350,10 +352,28 @@ export default function DriverDashboard({ user }: DriverDashboardProps) {
               <span className="text-sm text-orange-600">お送り中</span>
             </div>
             
+            {/* リアルタイム料金メーター */}
+            <DrivingMeter
+              onStart={() => console.log('運転開始')}
+              onPause={() => console.log('運転一時停止')}
+              onStop={() => handleUpdateStatus('completed')}
+              className="rounded-lg"
+            />
+            
             <div className="bg-orange-50 rounded-lg p-4">
               <div className="mb-4">
                 <h4 className="font-medium text-gray-900">{currentRide.customerName}</h4>
                 <p className="text-sm text-gray-600">目的地まで安全運転でお送りください</p>
+              </div>
+              
+              <div className="flex space-x-3 mb-4">
+                <Link
+                  href="/meter"
+                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center justify-center text-sm font-medium transition-colors"
+                >
+                  <Gauge className="w-4 h-4 mr-2" />
+                  フルスクリーンメーター
+                </Link>
               </div>
               
               <button
